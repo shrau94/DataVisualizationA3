@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import BarChart from "./BarChart";
+import HeaderKPI from "./HeaderKPI";
+import Legend from "./Legend";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="dv-3">
+      <div>
+        <h1>Trips in New York city in December 2019</h1>
+        <HeaderKPI />
+        <Legend> </Legend>
+        <BarChart />
+      </div>
     </div>
   );
 }
