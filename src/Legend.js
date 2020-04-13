@@ -9,10 +9,14 @@ class Legend extends Component {
   }
 
   componentDidMount() {
-    var svg = d3.select(this.refs.legend);
+    var svg = d3
+      .select(this.refs.legend)
+      .attr("width", window.innerWidth)
+      .attr("height", 50);
+    var widthBuffer = window.innerWidth / 2 - 170;
     svg
       .append("circle")
-      .attr("cx", 20)
+      .attr("cx", widthBuffer + 20)
       .attr("cy", 20)
       .attr("r", 6)
       .attr("stroke", "black")
@@ -21,7 +25,7 @@ class Legend extends Component {
       .style("fill", "#B1C578");
     svg
       .append("circle")
-      .attr("cx", 150)
+      .attr("cx", widthBuffer + 150)
       .attr("cy", 20)
       .attr("r", 6)
       .attr("stroke", "black")
@@ -30,14 +34,14 @@ class Legend extends Component {
       .style("fill", "#FFFFA0");
     svg
       .append("text")
-      .attr("x", 40)
+      .attr("x", widthBuffer + 40)
       .attr("y", 20)
       .text("Green Taxis")
       .style("font-size", "15px")
       .attr("alignment-baseline", "middle");
     svg
       .append("text")
-      .attr("x", 170)
+      .attr("x", widthBuffer + 170)
       .attr("y", 20)
       .text("Yellow Taxis")
       .style("font-size", "15px")

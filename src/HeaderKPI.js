@@ -14,10 +14,10 @@ class HeaderKPI extends Component {
       flexDisplay: {
         display: "flex",
         justifyItems: "center",
-        margin: "10px",
+        margin: "20px",
       },
       minimumWidth: {
-        minWidth: "300px",
+        minWidth: window.innerWidth / 4,
         minHeight: "100px",
       },
       dispFlex: {

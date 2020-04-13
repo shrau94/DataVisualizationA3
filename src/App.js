@@ -1,9 +1,11 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import BarChart from "./BarChart";
 import HeaderKPI from "./HeaderKPI";
 import Legend from "./Legend";
+import SankeyChart from "./SankeyChart";
+import BarChart from "./BarChart";
+import BubbleChart from "./BubbleChart";
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
         <h1>Trips in New York city in December 2019</h1>
         <HeaderKPI />
         <Legend> </Legend>
-        <BarChart />
+        <SankeyChart></SankeyChart>
+        <BubbleChart></BubbleChart>
+        <BarChart></BarChart>
       </div>
     </div>
   );
