@@ -1,24 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-class BubbleChart extends Component {
+class StackedChart extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {
-    var margin = { top: 50, right: 50, bottom: 40, left: 70 },
-      width = window.innerWidth - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
-
-    // append the svg object to the body of the page
-    var svg = window.d3
-      .select("#my_dataviz")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
     //Read the data
     var data = [
       {
@@ -271,8 +258,21 @@ class BubbleChart extends Component {
       },
     ];
 
+    var margin = { top: 70, right: 70, bottom: 40, left: 70 },
+      width = window.innerWidth - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = window.d3
+      .select("#stackedChart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     var tooltip = window.d3
-      .select("#my_dataviz")
+      .select("#stackedChart")
       .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
@@ -290,45 +290,60 @@ class BubbleChart extends Component {
         .style("opacity", 1)
         .html(
           "Start time: " +
-            d.start_time +
+            d.data.start_time +
             "<br />" +
-            "Trip distance: " +
-            d.trip_distance.toFixed(2) +
+            "Fare: " +
+            d.data.fare_amount.toFixed(2) +
             "<br />" +
-            "Passenger count: " +
-            d.passenger_count +
+            "Tip: " +
+            d.data.tip_amount.toFixed(2) +
             "<br />"
         )
         .style("left", window.d3.mouse(this)[0] + 80 + "px")
-        .style("top", window.d3.mouse(this)[1] + 900 + "px");
+        .style("top", window.d3.mouse(this)[1] + 1400 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
         .style("left", window.d3.mouse(this)[0] + 80 + "px")
-        .style("top", window.d3.mouse(this)[1] + 900 + "px");
+        .style("top", window.d3.mouse(this)[1] + 1400 + "px");
     };
     var hideTooltip = function (d) {
       tooltip.transition().duration(200).style("opacity", 0);
     };
+    // Parse the Data
 
-    // Add X axis
+    // List of subgroups = header of the csv files = soil condition here
+    var subgroups = ["fare_amount", "tip_amount"];
+
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    // var groups = window.d3.map(data, function (d) {
+    //   return new Date(d.start_time);
+    // });
+
+    // window.d3.layout.stack(data);
+
+    var color = window.d3
+      .scaleOrdinal()
+      .domain(subgroups)
+      .range(["#a3a3a3", "#B1C578"]);
+
     var x = window.d3.scaleTime().range([0, width]);
-    var y = window.d3.scaleLinear().domain([0, 136802]).range([height, 0]);
-    var z = window.d3.scaleLinear().domain([0, 136802]).range([1, 250]);
+    var y = window.d3.scaleLinear().domain([0, 300000]).range([height, 0]);
 
-    svg.append("g").attr("transform", "translate(0," + height + ")");
+    svg.append("g").attr("transform", "trans÷late(0," + height + ")");
 
     var parseTime = window.d3.timeFormat("%Y-%m-%d");
     data.forEach(function (d) {
       d.date = parseTime(new Date(d.start_time));
-      d.trip_distance = +d.trip_distance;
+      d.fare_amount = +d.fare_amount;
+      d.tip_amount = +d.tip_amount;
+      d.percent = ((d.tip_amount / d.fare_amount) * 100).toFixed(2);
     });
     x.domain(
       window.d3.extent(data, function (d) {
-        return new Date(d.date);
+        return new Date(d.start_time);
       })
     );
-
     console.log(data);
     svg
       .append("g")
@@ -343,31 +358,14 @@ class BubbleChart extends Component {
       .attr("dx", "3em")
       .attr("dy", "2em")
       .attr("transform", "rotate(0)");
-
-    var valueline = window.d3
-      .line()
-      .x(function (d) {
-        return x(new Date(d.date));
-      })
-      .y(function (d) {
-        return y(d.trip_distance);
-      });
-
-    svg
-      .append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", valueline)
-      .style("fill", "#a3a3a3");
     // Add Y axis
 
-    y.domain([
-      0,
-      window.d3.max(data, function (d) {
-        return d.trip_distance;
-      }),
-    ]);
-
+    // y.domain([
+    //   0,
+    //   window.d3.max(data, function (d) {
+    //     return d.fare_amount + d.tip_amount;
+    //   }),
+    // ]);
     svg
       .append("g")
       .attr("class", "axis")
@@ -375,33 +373,65 @@ class BubbleChart extends Component {
       .selectAll("text")
       .style("font-size", "12px");
 
-    // Add a scale for bubble size
+    // color palette = one color per subgroup
 
-    // Add dots
+    //stack the data? --> stack per subgroup
+    var stackedData = window.d3.stack().keys(subgroups)(data);
+    console.log(stackedData);
+    // Show the bars
     svg
       .append("g")
-      .selectAll("dot")
-      .data(data)
+      .selectAll("g")
+      // Enter in the stack data = loop key per key = group per group
+      .data(stackedData)
       .enter()
-      .append("circle")
-      .attr("cx", function (d) {
-        return x(new Date(d.date));
+      .append("g")
+      .attr("fill", function (d) {
+        return color(d.key);
       })
-      .attr("cy", function (d) {
-        return y(d.trip_distance);
+      .selectAll("rect")
+      // enter a second time = loop subgroup per subgroup to add all rectangles
+      .data(function (d) {
+        return d;
       })
-      .attr("r", function (d) {
-        return z(d.passenger_count);
+      .enter()
+      .append("rect")
+      .attr("x", function (d) {
+        return x(new Date(d.data.start_time));
       })
-      .style("fill", "#B1C578")
-      .style("opacity", "0.8")
-      .attr("stroke", "black")
+      .attr("y", function (d) {
+        return y(d[1]);
+      })
+      .attr("height", function (d) {
+        return y(d[0]) - y(d[1]);
+      })
+      .attr("width", 30)
+      .text(function (d) {
+        return d.data.percent;
+      })
       .on("mouseover", showTooltip)
       .on("mousemove", moveTooltip)
       .on("mouseleave", hideTooltip);
+    svg
+      .selectAll("text.bar")
+      .attr("class", "bar")
+      .data(data)
+      .enter()
+      .append("text")
+      .style("font-size", 12)
+      .attr("fill", "black")
+      .attr("x", function (d) {
+        return x(new Date(d.start_time));
+      })
+      .attr("y", function (d) {
+        return y(d.fare_amount + d.tip_amount) - 10;
+      })
+      .text(function (d) {
+        return d.percent + "%";
+      });
   }
   render() {
-    return <div id="my_dataviz"></div>;
+    return <div id="stackedChart"></div>;
   }
 }
-export default BubbleChart;
+export default StackedChart;

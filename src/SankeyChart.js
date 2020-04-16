@@ -189,12 +189,12 @@ class SankeyChart extends Component {
           d.source.name + " - " + d.target.name + "<br />" + "Trips: " + d.value
         )
         .style("left", window.d3.mouse(this)[0] + 30 + "px")
-        .style("top", window.d3.mouse(this)[1] + 400 + "px");
+        .style("top", window.d3.mouse(this)[1] + 320 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
         .style("left", window.d3.mouse(this)[0] + 30 + "px")
-        .style("top", window.d3.mouse(this)[1] + 400 + "px");
+        .style("top", window.d3.mouse(this)[1] + 320 + "px");
     };
     var hideTooltip = function (d) {
       tooltip.transition().duration(200).style("opacity", 0);
@@ -294,12 +294,6 @@ class SankeyChart extends Component {
     }
   }
   render() {
-    const styles = {
-      container: {
-        display: "grid",
-        justifyItems: "center",
-      },
-    };
     return <div id="my_dataviz"></div>;
   }
 }
