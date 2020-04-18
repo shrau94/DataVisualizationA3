@@ -11,39 +11,39 @@ class Legend extends Component {
   componentDidMount() {
     var svg = d3
       .select(this.refs.legend)
-      .attr("width", window.innerWidth)
-      .attr("height", 50);
-    var widthBuffer = window.innerWidth / 2 - 170;
+      .attr("width", 120)
+      .attr("height", 100);
+    var widthBuffer = 0;
     svg
       .append("circle")
-      .attr("cx", widthBuffer + 20)
-      .attr("cy", 20)
-      .attr("r", 6)
-      .attr("stroke", "black")
-      .style("stroke-width", "2px")
-      .style("opacity", 0.7)
-      .style("fill", "#B1C578");
-    svg
-      .append("circle")
-      .attr("cx", widthBuffer + 150)
-      .attr("cy", 20)
+      .attr("cx", widthBuffer + 10)
+      .attr("cy", 40)
       .attr("r", 6)
       .attr("stroke", "black")
       .style("stroke-width", "2px")
       .style("opacity", 0.7)
       .style("fill", "#FFFFA0");
     svg
+      .append("circle")
+      .attr("cx", widthBuffer + 10)
+      .attr("cy", 80)
+      .attr("r", 6)
+      .attr("stroke", "black")
+      .style("stroke-width", "2px")
+      .style("opacity", 0.7)
+      .style("fill", "#B1C578");
+    svg
       .append("text")
-      .attr("x", widthBuffer + 40)
-      .attr("y", 20)
-      .text("Green Taxis")
+      .attr("x", widthBuffer + 30)
+      .attr("y", 40)
+      .text("Yellow Taxis")
       .style("font-size", "15px")
       .attr("alignment-baseline", "middle");
     svg
       .append("text")
-      .attr("x", widthBuffer + 170)
-      .attr("y", 20)
-      .text("Yellow Taxis")
+      .attr("x", widthBuffer + 30)
+      .attr("y", 80)
+      .text("Green Taxis")
       .style("font-size", "15px")
       .attr("alignment-baseline", "middle");
   }

@@ -55,7 +55,7 @@ class HorizontalBar extends Component {
     // var gy = svg.append("g").attr("class", "y axis").call(yAxis);
 
     var bars = svg.selectAll(".bar").data(data).enter().append("g");
-    var color = ["#FFFFA0", "#B1C578", "#FFE77AFF", "#2C5F2DFF"];
+    var color = ["#B1C578", "#FFFFA0", "#FFE77AFF", "#2C5F2DFF"];
     //append rects
     bars
       .append("rect")

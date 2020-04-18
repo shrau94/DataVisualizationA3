@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
+import InfoIcon from "./InfoIcon";
+import ReactTooltip from "react-tooltip";
 class SankeyChart extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {
-    // const script = document.createElement("script");
-    // script.src = "https://d3js.org/d3.v4.min.js";
-    // script.async = true;
-    // script.onload = () => this.scriptLoaded();
-
     // document.body.appendChild(script);
+    var taxiType = this.props.taxi;
     var margin = { top: 20, right: 20, bottom: 20, left: 20 },
-      width = window.innerWidth - margin.left - margin.right,
+      width = window.innerWidth - margin.left - margin.right - 60,
       height = 550 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = window.d3
-      .select("#my_dataviz")
+      .select("#sankeyChart")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -35,8 +33,9 @@ class SankeyChart extends Component {
       .nodePadding(290)
       .size([width, height]);
 
+    var graph = {};
     // load the data
-    var graph = {
+    var greenGraph = {
       nodes: [
         {
           node: 0,
@@ -64,7 +63,7 @@ class SankeyChart extends Component {
         },
         {
           node: 6,
-          name: "State Island",
+          name: "Staten Island",
         },
       ],
       links: [
@@ -166,11 +165,156 @@ class SankeyChart extends Component {
       ],
     };
 
+    var yellowGraph = {
+      nodes: [
+        {
+          node: 0,
+          name: "Queens",
+        },
+        {
+          node: 1,
+          name: "Manhattan",
+        },
+        {
+          node: 2,
+          name: "Brooklyn",
+        },
+        {
+          node: 3,
+          name: "Unknown",
+        },
+        {
+          node: 4,
+          name: "Bronx",
+        },
+        {
+          node: 5,
+          name: "Newark Airport",
+        },
+        {
+          node: 6,
+          name: "Staten Island",
+        },
+      ],
+      links: [
+        {
+          source: 4,
+          target: 2,
+          value: 878 + 1082,
+        },
+        {
+          source: 4,
+          target: 5,
+          value: 4 + 1,
+        },
+        {
+          source: 4,
+          target: 1,
+          value: 4923 + 32806,
+        },
+        {
+          source: 4,
+          target: 0,
+          value: 1055 + 7715,
+        },
+        {
+          source: 4,
+          target: 6,
+          value: 24 + 6,
+        },
+        {
+          source: 4,
+          target: 3,
+          value: 163 + 140,
+        },
+        {
+          source: 2,
+          target: 5,
+          value: 89,
+        },
+        {
+          source: 2,
+          target: 1,
+          value: 24029 + 172336,
+        },
+        {
+          source: 2,
+          target: 0,
+          value: 5834 + 63957,
+        },
+        {
+          source: 2,
+          target: 6,
+          value: 133 + 51,
+        },
+        {
+          source: 2,
+          target: 3,
+          value: 509 + 860,
+        },
+        {
+          source: 5,
+          target: 1,
+          value: 13 + 15529,
+        },
+        {
+          source: 5,
+          target: 0,
+          value: 2 + 451,
+        },
+        {
+          source: 5,
+          target: 3,
+          value: 159 + 206,
+        },
+        {
+          source: 1,
+          target: 0,
+          value: 216624 + 237998,
+        },
+        {
+          source: 1,
+          target: 6,
+          value: 1239 + 63,
+        },
+        {
+          source: 1,
+          target: 3,
+          value: 16550 + 16368,
+        },
+        {
+          source: 0,
+          target: 6,
+          value: 482 + 48,
+        },
+        {
+          source: 0,
+          target: 3,
+          value: 10631 + 1777,
+        },
+        {
+          source: 6,
+          target: 3,
+          value: 12,
+        },
+      ],
+    };
+
+    var color = "";
+
+    if (taxiType === "green") {
+      graph = greenGraph;
+      color = "#B1C578";
+    } else {
+      graph = yellowGraph;
+      color = "#FFFFA0";
+    }
+
     // Constructs a new Sankey generator with the default settings.
     sankey.nodes(graph.nodes).links(graph.links).layout(1);
 
     var tooltip = window.d3
-      .select("#my_dataviz")
+      .select("#sankeyChart")
       .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
@@ -186,18 +330,23 @@ class SankeyChart extends Component {
       tooltip
         .style("opacity", 1)
         .html(
-          d.source.name + " - " + d.target.name + "<br />" + "Trips: " + d.value
+          d.source.name +
+            " and " +
+            d.target.name +
+            "<br />" +
+            "Trips: " +
+            d.value
         )
-        .style("left", window.d3.mouse(this)[0] + 30 + "px")
-        .style("top", window.d3.mouse(this)[1] + 320 + "px");
+        .style("left", window.d3.mouse(this)[0] + 50 + "px")
+        .style("top", window.d3.mouse(this)[1] + 400 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
-        .style("left", window.d3.mouse(this)[0] + 30 + "px")
-        .style("top", window.d3.mouse(this)[1] + 320 + "px");
+        .style("left", window.d3.mouse(this)[0] + 50 + "px")
+        .style("top", window.d3.mouse(this)[1] + 400 + "px");
     };
     var hideTooltip = function (d) {
-      tooltip.transition().duration(200).style("opacity", 0);
+      tooltip.transition().duration(400).style("opacity", 0);
     };
 
     // add in the links
@@ -249,7 +398,7 @@ class SankeyChart extends Component {
         return d.dy;
       })
       .attr("width", sankey.nodeWidth())
-      .style("fill", "#B1C578")
+      .style("fill", color)
       .style("stroke", function (d) {
         return window.d3.rgb(d.color).darker(2);
       });
@@ -294,7 +443,44 @@ class SankeyChart extends Component {
     }
   }
   render() {
-    return <div id="my_dataviz"></div>;
+    const styles = {
+      sankeyStyle: {
+        marginTop: "20px",
+        marginBottom: "20px",
+        backgroundColor: "white",
+        borderRadius: "8px",
+        boxShadow: "#e4e4e4 2px 2px",
+      },
+      headingStyle: {
+        padding: "10px",
+        margin: "10px",
+        fontSize: "20px",
+      },
+      float: {
+        float: "right",
+      },
+    };
+    const infoContent =
+      "This sankey graph shows the  <br /> inter-borough trips done. <br /> Each rectangular node represents <br /> the different boroughs in New York. <br /> The width of the links are proportional <br /> to the number of trips between them. ";
+    return (
+      <div style={styles.sankeyStyle}>
+        <div>
+          <div style={styles.headingStyle}>
+            Trips between boroughs
+            <div data-tip={infoContent} style={styles.float}>
+              <InfoIcon></InfoIcon>
+            </div>
+            <ReactTooltip
+              type="light"
+              border="true"
+              borderColor="black"
+              html={true}
+            />
+          </div>
+        </div>
+        <div id="sankeyChart"></div>
+      </div>
+    );
   }
 }
 export default SankeyChart;

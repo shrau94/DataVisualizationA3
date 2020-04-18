@@ -1,0 +1,250 @@
+[
+  {
+    "start_time": "2019-12-01",
+    "trip_distance": 616841.2499999899,
+    "passenger_count": 288794,
+    "fare_amount": 2537348.10000002,
+    "tip_amount": 407268.2600000056,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-02",
+    "trip_distance": 659000.6099999978,
+    "passenger_count": 309996,
+    "fare_amount": 2865801.8600000325,
+    "tip_amount": 491847.1400000129,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-03",
+    "trip_distance": 756338.5799999965,
+    "passenger_count": 367717,
+    "fare_amount": 3429992.720000034,
+    "tip_amount": 596285.7300000144,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-04",
+    "trip_distance": 770266.7599999988,
+    "passenger_count": 369311,
+    "fare_amount": 3514514.490000032,
+    "tip_amount": 616918.5300000013,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-05",
+    "trip_distance": 822516.9699999924,
+    "passenger_count": 405218,
+    "fare_amount": 3850063.5800000406,
+    "tip_amount": 677117.3999999987,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-06",
+    "trip_distance": 800896.0500000081,
+    "passenger_count": 417782,
+    "fare_amount": 3776110.030000067,
+    "tip_amount": 648582.5200000085,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-07",
+    "trip_distance": 729208.6299999931,
+    "passenger_count": 431097,
+    "fare_amount": 3451423.6100000395,
+    "tip_amount": 561221.0100000172,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-08",
+    "trip_distance": 719880.9300000183,
+    "passenger_count": 353426,
+    "fare_amount": 3060895.4100000444,
+    "tip_amount": 502880.0200000338,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-09",
+    "trip_distance": 689796.8899999947,
+    "passenger_count": 333685,
+    "fare_amount": 3219569.2200000403,
+    "tip_amount": 558050.0800000159,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-10",
+    "trip_distance": 718467.2900000012,
+    "passenger_count": 364956,
+    "fare_amount": 3464320.3600000557,
+    "tip_amount": 614818.3599999965,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-11",
+    "trip_distance": 762825.4600000171,
+    "passenger_count": 396802,
+    "fare_amount": 3626330.530000052,
+    "tip_amount": 648855.2900000028,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-12",
+    "trip_distance": 838814.5600000069,
+    "passenger_count": 413183,
+    "fare_amount": 4031954.030000063,
+    "tip_amount": 717105.8299999996,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-13",
+    "trip_distance": 770337.200000005,
+    "passenger_count": 420566,
+    "fare_amount": 3947828.1100000585,
+    "tip_amount": 687538.9399999904,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-14",
+    "trip_distance": 728202.4999999974,
+    "passenger_count": 424502,
+    "fare_amount": 3439815.760000052,
+    "tip_amount": 569931.5300000021,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-15",
+    "trip_distance": 736102.9200000083,
+    "passenger_count": 373511,
+    "fare_amount": 3171224.0600000382,
+    "tip_amount": 522413.4800000205,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-16",
+    "trip_distance": 681806.0500000097,
+    "passenger_count": 351124,
+    "fare_amount": 3536939.9400000516,
+    "tip_amount": 543358.2800000154,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-17",
+    "trip_distance": 694019.0399999828,
+    "passenger_count": 379040,
+    "fare_amount": 3331046.9400000484,
+    "tip_amount": 588013.2800000132,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-18",
+    "trip_distance": 747274.3499999957,
+    "passenger_count": 394606,
+    "fare_amount": 3576852.1400000574,
+    "tip_amount": 631172.2899999971,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-19",
+    "trip_distance": 805691.3400000089,
+    "passenger_count": 425646,
+    "fare_amount": 3834390.920000051,
+    "tip_amount": 677945.0899999974,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-20",
+    "trip_distance": 782562.179999995,
+    "passenger_count": 415907,
+    "fare_amount": 3653617.7200000747,
+    "tip_amount": 622111.4900000205,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-21",
+    "trip_distance": 637315.9899999943,
+    "passenger_count": 364366,
+    "fare_amount": 2852954.05000004,
+    "tip_amount": 456647.030000005,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-22",
+    "trip_distance": 552351.2800000026,
+    "passenger_count": 287509,
+    "fare_amount": 2405500.6900000283,
+    "tip_amount": 359264.2700000016,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-23",
+    "trip_distance": 530323.7600000021,
+    "passenger_count": 280383,
+    "fare_amount": 2404300.7800000347,
+    "tip_amount": 361442.08,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-24",
+    "trip_distance": 450302.5699999981,
+    "passenger_count": 263145,
+    "fare_amount": 1930554.9699999853,
+    "tip_amount": 283328.3499999997,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-25",
+    "trip_distance": 346255.4900000055,
+    "passenger_count": 167775,
+    "fare_amount": 1378853.5999999924,
+    "tip_amount": 189372.0399999978,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-26",
+    "trip_distance": 475854.8300000047,
+    "passenger_count": 238060,
+    "fare_amount": 2002412.429999999,
+    "tip_amount": 286739.5099999946,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-27",
+    "trip_distance": 539740.8500000079,
+    "passenger_count": 275267,
+    "fare_amount": 2320386.770000026,
+    "tip_amount": 331222.3999999976,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-28",
+    "trip_distance": 552390.3300000019,
+    "passenger_count": 287520,
+    "fare_amount": 2374193.220000028,
+    "tip_amount": 332152.5199999997,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-29",
+    "trip_distance": 557714.5300000041,
+    "passenger_count": 271719,
+    "fare_amount": 2306821.660000026,
+    "tip_amount": 332162.619999995,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-30",
+    "trip_distance": 535018.1000000071,
+    "passenger_count": 274615,
+    "fare_amount": 2306889.900000026,
+    "tip_amount": 342569.2899999995,
+    "year": "2019"
+  },
+  {
+    "start_time": "2019-12-31",
+    "trip_distance": 496247.2900000085,
+    "passenger_count": 268342,
+    "fare_amount": 2114319.799999999,
+    "tip_amount": 320527.3600000004,
+    "year": "2019"
+  }
+]
