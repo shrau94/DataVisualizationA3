@@ -23,9 +23,6 @@ class SankeyChart extends Component {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // Color scale used
-    var color = window.d3.scaleOrdinal(window.d3.schemeCategory20);
-
     // Set the sankey diagram properties
     var sankey = window.d3
       .sankey()
@@ -337,12 +334,12 @@ class SankeyChart extends Component {
             "Trips: " +
             d.value
         )
-        .style("left", window.d3.mouse(this)[0] + 50 + "px")
+        .style("left", window.d3.mouse(this)[0] + 100 + "px")
         .style("top", window.d3.mouse(this)[1] + 400 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
-        .style("left", window.d3.mouse(this)[0] + 50 + "px")
+        .style("left", window.d3.mouse(this)[0] + 100 + "px")
         .style("top", window.d3.mouse(this)[1] + 400 + "px");
     };
     var hideTooltip = function (d) {
@@ -461,7 +458,7 @@ class SankeyChart extends Component {
       },
     };
     const infoContent =
-      "This sankey graph shows the  <br /> inter-borough trips done. <br /> Each rectangular node represents <br /> the different boroughs in New York. <br /> The width of the links are proportional <br /> to the number of trips between them. ";
+      "This Sankey Graph shows the  <br /> inter-borough trips done. <br /> Each rectangular node represents <br /> the different boroughs in New York. <br /> The width of the links are proportional <br /> to the number of trips between them. ";
     return (
       <div style={styles.sankeyStyle}>
         <div>
@@ -472,7 +469,7 @@ class SankeyChart extends Component {
             </div>
             <ReactTooltip
               type="light"
-              border="true"
+              border={true}
               borderColor="black"
               html={true}
             />

@@ -18,7 +18,7 @@ class DonutChart extends Component {
 
     // append the svg object to the div called 'my_dataviz'
     var svg = d3
-      .select(this.refs.donutChart)
+      .select("#donutChart")
       .append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -69,7 +69,7 @@ class DonutChart extends Component {
   }
 
   render() {
-    return <div ref="donutChart"></div>;
+    return <div id="donutChart"></div>;
   }
 }
 export default DonutChart;

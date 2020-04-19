@@ -9,10 +9,7 @@ class Legend extends Component {
   }
 
   componentDidMount() {
-    var svg = d3
-      .select(this.refs.legend)
-      .attr("width", 120)
-      .attr("height", 100);
+    var svg = d3.select("#legend").attr("width", 120).attr("height", 100);
     var widthBuffer = 0;
     svg
       .append("circle")
@@ -51,7 +48,7 @@ class Legend extends Component {
   render() {
     return (
       <div>
-        <svg ref="legend"> </svg>
+        <svg id="legend"> </svg>
       </div>
     );
   }

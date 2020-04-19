@@ -11,7 +11,6 @@ class HeaderKPI extends Component {
   }
 
   render() {
-    console.log(window.innerWidth);
     const styles = {
       flexDisplay: {
         display: "flex",
@@ -75,7 +74,10 @@ class HeaderKPI extends Component {
       <div style={styles.flexDisplay}>
         <div style={styles.minimumWidth}>
           Total trips per day
-          <HorizontalBar data={tripsPerDayData}></HorizontalBar>
+          <HorizontalBar
+            type="totalTrips"
+            data={tripsPerDayData}
+          ></HorizontalBar>
         </div>
         <div style={styles.minimumWidth}>
           Payment made with credit card
@@ -94,11 +96,17 @@ class HeaderKPI extends Component {
         </div>
         <div style={styles.minimumWidth}>
           Total fare per day
-          <HorizontalBar data={fareEarnedData}></HorizontalBar>
+          <HorizontalBar
+            type="totalEarned"
+            data={fareEarnedData}
+          ></HorizontalBar>
         </div>
         <div style={styles.minimumWidth}>
           Average minutes per trip
-          <HorizontalBar data={avgMinsPerTripData}></HorizontalBar>
+          <HorizontalBar
+            type="avgMins"
+            data={avgMinsPerTripData}
+          ></HorizontalBar>
         </div>
         <div style={styles.legend}>
           <Legend> </Legend>

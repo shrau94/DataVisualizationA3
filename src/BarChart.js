@@ -11,7 +11,7 @@ class BarChart extends Component {
     const w = 600;
     const h = 300;
     const svg = d3
-      .select(this.refs.chart)
+      .select("#chart")
       .append("svg")
       .attr("width", w)
       .attr("height", h)
@@ -49,7 +49,7 @@ class BarChart extends Component {
         justifyItems: "center",
       },
     };
-    return <div ref="chart" style={styles.container}></div>;
+    return <div id="chart" style={styles.container}></div>;
   }
 }
 export default BarChart;

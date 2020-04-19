@@ -8,6 +8,7 @@ class HorizontalBar extends Component {
   }
   componentDidMount() {
     const data = this.props.data;
+    const type = this.props.type;
     var margin = {
       top: 15,
       right: 80,
@@ -19,7 +20,7 @@ class HorizontalBar extends Component {
       height = 100 - margin.top - margin.bottom;
 
     var svg = d3
-      .select(this.refs.barChart)
+      .select("#" + type)
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -46,17 +47,9 @@ class HorizontalBar extends Component {
         })
       );
 
-    //make y axis to show bar names
-    // var yAxis = d3
-    //   .axisLeft(y)
-    //   //no tick marks
-    //   .tickSize(0);
-
-    // var gy = svg.append("g").attr("class", "y axis").call(yAxis);
-
     var bars = svg.selectAll(".bar").data(data).enter().append("g");
     var color = ["#B1C578", "#FFFFA0", "#FFE77AFF", "#2C5F2DFF"];
-    //append rects
+
     bars
       .append("rect")
       .attr("class", "sBar")
@@ -75,15 +68,12 @@ class HorizontalBar extends Component {
         return x(d.value);
       });
 
-    //add a value label to the right of each bar
     bars
       .append("text")
       .attr("class", "label")
-      //y position of the label is halfway down the bar
       .attr("y", function (d) {
         return y(d.name) + y.bandwidth() / 2 + 4;
       })
-      //x position is 3 pixels to the right of the bar
       .attr("x", function (d) {
         return x(d.value) + 3;
       })
@@ -97,7 +87,8 @@ class HorizontalBar extends Component {
         display: "grid",
       },
     };
-    return <div ref="barChart" style={styles.container}></div>;
+    const type = this.props.type;
+    return <div id={type} style={styles.container}></div>;
   }
 }
 export default HorizontalBar;

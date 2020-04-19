@@ -55,7 +55,6 @@ class BubbleChart extends Component {
       .style("box-shadow", "#a3a3a3 2px 2px");
 
     var showTooltip = function (d) {
-      console.log("tooltip shown");
       tooltip.transition().duration(200);
       tooltip
         .style("opacity", 1)
@@ -71,16 +70,14 @@ class BubbleChart extends Component {
             "<br />"
         )
         .style("left", window.d3.mouse(this)[0] + 150 + "px")
-        .style("top", window.d3.mouse(this)[1] + 1000 + "px");
+        .style("top", window.d3.mouse(this)[1] + 1100 + "px");
     };
     var moveTooltip = function (d) {
-      console.log("tooltip moved");
       tooltip
         .style("left", window.d3.mouse(this)[0] + 150 + "px")
-        .style("top", window.d3.mouse(this)[1] + 1000 + "px");
+        .style("top", window.d3.mouse(this)[1] + 1100 + "px");
     };
     var hideTooltip = function (d) {
-      console.log("tooltip hidden");
       tooltip.transition().duration(200).style("opacity", 0);
     };
 
@@ -102,7 +99,6 @@ class BubbleChart extends Component {
       })
     );
 
-    console.log(data);
     svg
       .append("g")
       .attr("class", "axis")
@@ -130,10 +126,9 @@ class BubbleChart extends Component {
       .append("path")
       .data([data])
       .attr("class", "line")
-      .attr("d", valueline)
       .style("stroke", "black")
-      .style("fill", "#e1e1dd");
-    // Add Y axis
+      .style("fill", "#e1e1dd")
+      .attr("d", valueline);
 
     y.domain([
       0,
@@ -152,7 +147,7 @@ class BubbleChart extends Component {
     // Add a scale for bubble size
 
     // Add dots
-    svg
+    var bubbles = svg
       .append("g")
       .selectAll("dot")
       .data(data)
@@ -164,16 +159,22 @@ class BubbleChart extends Component {
       .attr("cy", function (d) {
         return y(d.trip_distance);
       })
-      .attr("r", function (d) {
-        return z(d.passenger_count);
-      })
-      .style("fill", color)
-      .style("opacity", "0.8")
-      .attr("stroke", "black")
       .on("mouseover", showTooltip)
       .on("mousemove", moveTooltip)
       .on("mouseleave", hideTooltip);
 
+    bubbles
+      .transition()
+      .duration(500)
+      .attr("r", function (d) {
+        return z(d.passenger_count);
+      })
+      .delay(function (d, i) {
+        return i * 500;
+      })
+      .style("fill", color)
+      .style("opacity", "0.8")
+      .attr("stroke", "black");
     svg
       .append("text")
       .attr("text-anchor", "end")
@@ -282,7 +283,7 @@ class BubbleChart extends Component {
       },
     };
     const infoContent =
-      "This sankey graph shows the  <br /> inter-borough trips done. <br /> Each rectangular node represents <br /> the different boroughs in New York. <br /> The width of the links are proportional <br /> to the number of trips between them. ";
+      "This Bubble Chart shows the total distance  <br /> covered by all the taxis in a day. <br /> The bubble represents the total <br /> number of passengers per day. <br /> The size of the bubble is proportional <br /> to the number of passengers. ";
     return (
       <div style={styles.bubbleStyle}>
         <div>
@@ -293,7 +294,7 @@ class BubbleChart extends Component {
             </div>
             <ReactTooltip
               type="light"
-              border="true"
+              border={true}
               borderColor="black"
               html={true}
             />

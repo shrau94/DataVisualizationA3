@@ -15,14 +15,14 @@ class StackedChart extends Component {
     //Read the data
     var data = [];
     var domain = 0;
-    var color = "";
+    var color1 = "";
     if (taxiType === "green") {
       data = greenTaxiData;
       domain = 300000;
-      color = "#B1C578";
+      color1 = "#B1C578";
     } else {
       data = yellowTaxiData;
-      color = "#FFFFA0";
+      color1 = "#FFFFA0";
       domain = 5000000;
     }
 
@@ -52,7 +52,6 @@ class StackedChart extends Component {
 
     var showTooltip = function (d) {
       tooltip.transition().duration(200);
-      console.log(d);
       tooltip
         .style("opacity", 1)
         .html(
@@ -67,12 +66,12 @@ class StackedChart extends Component {
             "<br />"
         )
         .style("left", window.d3.mouse(this)[0] + 150 + "px")
-        .style("top", window.d3.mouse(this)[1] + 1600 + "px");
+        .style("top", window.d3.mouse(this)[1] + 1700 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
         .style("left", window.d3.mouse(this)[0] + 150 + "px")
-        .style("top", window.d3.mouse(this)[1] + 1600 + "px");
+        .style("top", window.d3.mouse(this)[1] + 1700 + "px");
     };
     var hideTooltip = function (d) {
       tooltip.transition().duration(400).style("opacity", 0);
@@ -83,12 +82,10 @@ class StackedChart extends Component {
     var color = window.d3
       .scaleOrdinal()
       .domain(subgroups)
-      .range(["#e1e1dd", color]);
+      .range(["#e1e1dd", color1]);
 
     var x = window.d3.scaleTime().range([0, width]);
     var y = window.d3.scaleLinear().domain([0, domain]).range([height, 0]);
-
-    svg.append("g").attr("transform", "trans÷late(0," + height + ")");
 
     var parseTime = window.d3.timeFormat("%Y-%m-%d");
     data.forEach(function (d) {
@@ -102,7 +99,6 @@ class StackedChart extends Component {
         return new Date(d.start_time);
       })
     );
-    console.log(data);
     svg
       .append("g")
       .attr("class", "axis")
@@ -126,7 +122,7 @@ class StackedChart extends Component {
 
     var stackedData = window.d3.stack().keys(subgroups)(data);
 
-    svg
+    var bars = svg
       .append("g")
       .selectAll("g")
 
@@ -147,11 +143,9 @@ class StackedChart extends Component {
         return x(new Date(d.data.start_time));
       })
       .attr("y", function (d) {
-        return y(d[1]);
+        return y(0);
       })
-      .attr("height", function (d) {
-        return y(d[0]) - y(d[1]);
-      })
+      .attr("height", 0)
       .attr("width", 30)
       .text(function (d) {
         return d.data.percent;
@@ -160,6 +154,20 @@ class StackedChart extends Component {
       .on("mouseover", showTooltip)
       .on("mousemove", moveTooltip)
       .on("mouseleave", hideTooltip);
+
+    bars
+      .transition()
+      .duration(500)
+      .delay(function (d, i) {
+        return i * 500;
+      })
+      .attr("y", function (d) {
+        return y(d[1]);
+      })
+      .attr("height", function (d) {
+        return y(d[0]) - y(d[1]);
+      });
+
     svg
       .selectAll("text.bar")
       .attr("class", "bar")
@@ -174,7 +182,11 @@ class StackedChart extends Component {
       .attr("y", function (d) {
         return y(d.fare_amount + d.tip_amount) - 10;
       })
-
+      .transition()
+      .duration(500)
+      .delay(function (d, i) {
+        return i * 500;
+      })
       .text(function (d) {
         return d.percent + "%";
       });
@@ -182,7 +194,7 @@ class StackedChart extends Component {
     svg
       .append("text")
       .attr("x", labelPosition - 80)
-      .attr("y", 30)
+      .attr("y", 50)
       .text("Percentage of tip earned")
       .style("font-size", "15px")
       .attr("alignment-baseline", "middle")
@@ -192,7 +204,7 @@ class StackedChart extends Component {
       .append("line") //making a line for legend
       .attr("x1", labelPosition - 30)
       .attr("x2", labelPosition - 30)
-      .attr("y1", 40)
+      .attr("y1", 60)
       .attr("y2", 120)
       .style("stroke-dasharray", "5,5") //dashed array for line
       .style("stroke", "black");
@@ -211,6 +223,39 @@ class StackedChart extends Component {
       .attr("y", -margin.left + 20)
       .attr("x", -margin.top + 20)
       .text("Total earnings on a day (Fare + Tip)");
+
+    svg
+      .append("circle")
+      .attr("cx", labelPosition - 50)
+      .attr("cy", 0)
+      .attr("r", 6)
+      .attr("stroke", "black")
+      .style("stroke-width", "2px")
+      .style("opacity", 0.7)
+      .style("fill", color1);
+    svg
+      .append("circle")
+      .attr("cx", labelPosition - 50)
+      .attr("cy", 20)
+      .attr("r", 6)
+      .attr("stroke", "black")
+      .style("stroke-width", "2px")
+      .style("opacity", 0.7)
+      .style("fill", "#e1e1dd");
+    svg
+      .append("text")
+      .attr("x", labelPosition - 30)
+      .attr("y", 0)
+      .text("Total Tip")
+      .style("font-size", "15px")
+      .attr("alignment-baseline", "middle");
+    svg
+      .append("text")
+      .attr("x", labelPosition - 30)
+      .attr("y", 20)
+      .text("Total Fare")
+      .style("font-size", "15px")
+      .attr("alignment-baseline", "middle");
   }
   render() {
     const styles = {
@@ -231,7 +276,7 @@ class StackedChart extends Component {
       },
     };
     const infoContent =
-      "This sankey graph shows the  <br /> inter-borough trips done. <br /> Each rectangular node represents <br /> the different boroughs in New York. <br /> The width of the links are proportional <br /> to the number of trips between them. ";
+      "This Stacked Bar Chart shows the  <br /> financial gains by the taxis. <br /> These gains include both the total fare <br /> and the total tips acquired. <br /> The percentages shown above the bars <br /> are the percentage of tips out of overall gains. ";
     return (
       <div style={styles.stackedStyle}>
         <div>
@@ -242,7 +287,7 @@ class StackedChart extends Component {
             </div>
             <ReactTooltip
               type="light"
-              border="true"
+              border={true}
               borderColor="black"
               html={true}
             />
