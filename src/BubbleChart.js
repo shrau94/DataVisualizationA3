@@ -70,12 +70,12 @@ class BubbleChart extends Component {
             "<br />"
         )
         .style("left", window.d3.mouse(this)[0] + 150 + "px")
-        .style("top", window.d3.mouse(this)[1] + 1100 + "px");
+        .style("top", window.d3.mouse(this)[1] + 450 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
         .style("left", window.d3.mouse(this)[0] + 150 + "px")
-        .style("top", window.d3.mouse(this)[1] + 1100 + "px");
+        .style("top", window.d3.mouse(this)[1] + 450 + "px");
     };
     var hideTooltip = function (d) {
       tooltip.transition().duration(200).style("opacity", 0);

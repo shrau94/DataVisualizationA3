@@ -334,13 +334,13 @@ class SankeyChart extends Component {
             "Trips: " +
             d.value
         )
-        .style("left", window.d3.mouse(this)[0] + 100 + "px")
-        .style("top", window.d3.mouse(this)[1] + 400 + "px");
+        .style("left", window.d3.mouse(this)[0] + 150 + "px")
+        .style("top", window.d3.mouse(this)[1] + 2100 + "px");
     };
     var moveTooltip = function (d) {
       tooltip
-        .style("left", window.d3.mouse(this)[0] + 100 + "px")
-        .style("top", window.d3.mouse(this)[1] + 400 + "px");
+        .style("left", window.d3.mouse(this)[0] + 150 + "px")
+        .style("top", window.d3.mouse(this)[1] + 2100 + "px");
     };
     var hideTooltip = function (d) {
       tooltip.transition().duration(400).style("opacity", 0);
