@@ -62,14 +62,14 @@ function App() {
             <TabPanel>
               <BubbleChart taxi="yellow"></BubbleChart>
               <StackedChart taxi="yellow"></StackedChart>
-              <SankeyChart taxi="yellow"></SankeyChart>
               <NyMap taxi="yellow"></NyMap>
+              <SankeyChart taxi="yellow"></SankeyChart>
             </TabPanel>
             <TabPanel>
               <BubbleChart taxi="green"></BubbleChart>
               <StackedChart taxi="green"></StackedChart>
-              <SankeyChart taxi="green"></SankeyChart>
               <NyMap taxi="green"></NyMap>
+              <SankeyChart taxi="green"></SankeyChart>
             </TabPanel>
           </Tabs>
         </div>
