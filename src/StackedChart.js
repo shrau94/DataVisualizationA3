@@ -214,7 +214,7 @@ class StackedChart extends Component {
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height + margin.top + 5)
-      .text("Day in the month of 2019");
+      .text("Day in December 2019");
 
     svg
       .append("text")
